@@ -50,8 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BaseTestClass.cs" />
+    <Compile Include="MathComputerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchTest.cs" />
+    <Compile Include="SearchComputerTest.cs" />
+    <Compile Include="SortComputerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Algorythms\Algorythms.csproj">
