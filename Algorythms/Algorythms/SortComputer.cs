@@ -34,5 +34,21 @@ namespace Algorythms
             }
             return entryArray;
         }
+
+        public int[] InsertionSort(int[] entryArray)
+        {
+            for (int i = 1; i < entryArray.Length; i++)
+            {
+                var key = entryArray[i];
+                var j = i - 1;
+                while (j >= 0 && entryArray[j] > key)
+                {
+                    entryArray[j + 1] = entryArray[j];
+                    j--;
+                }
+                entryArray[j + 1] = key;
+            }
+            return entryArray;
+        }
     }
 }
