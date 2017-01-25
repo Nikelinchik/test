@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Algorythms
                 }
             }
 
-            throw new Exception("Not Found");
+            throw new ObjectNotFoundException("Not Found");
         }
 
         public int BinarySearch(int[] entryArray, int searchValue)
@@ -29,11 +30,13 @@ namespace Algorythms
             while (p <= r)
             {
                 var q = (p + r) / 2;
-                if (searchValue == entryArray[q])
+
+                var valueToCheck = entryArray[q];
+                if (valueToCheck == searchValue)
                 {
                     return q;
                 }
-                else if (searchValue < entryArray[q])
+                else if (valueToCheck > searchValue)
                 {
                     r = q - 1;
                 }
@@ -42,7 +45,32 @@ namespace Algorythms
                     p = q + 1;
                 }
             }
-            throw new Exception("Not Found");
+            throw new ObjectNotFoundException("Not Found");
+        }
+
+        public int RecursiveBinarySearch(int[] entryArray, int searchValue, int p, int r)
+        {
+            if (p > r)
+            {
+                throw new ObjectNotFoundException("Not Found");
+            }
+
+            var q = (p + r) / 2;
+
+            var valueToCheck = entryArray[q];
+
+            if (valueToCheck == searchValue)
+            {
+                return q;
+            }
+            else if (valueToCheck > searchValue)
+            {
+                return this.RecursiveBinarySearch(entryArray, searchValue, p, q - 1);
+            }
+            else
+            {
+                return this.RecursiveBinarySearch(entryArray, searchValue, q + 1, r);
+            }
         }
 
         //public int SentinelLinearSearch(int[] entryArray, int searchValue)

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using System.Data;
 
 namespace Algorythms.Test
 {
@@ -65,7 +66,7 @@ namespace Algorythms.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ObjectNotFoundException))]
         public void LinearSearchNoTargetValueTest()
         {
             // Arrange
@@ -80,7 +81,7 @@ namespace Algorythms.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ObjectNotFoundException))]
         public void LinearSearchEmptyArrayTest()
         {
             // Arrange
@@ -129,7 +130,7 @@ namespace Algorythms.Test
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ObjectNotFoundException))]
         public void BinarySearchEmptyArrayTest()
         {
             // Arrange
@@ -145,7 +146,7 @@ namespace Algorythms.Test
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ObjectNotFoundException))]
         public void BinarySearchNoTargetValueTest()
         {
             // Arrange
@@ -154,6 +155,54 @@ namespace Algorythms.Test
 
             // Act
             var result = _searchComputer.BinarySearch(entryArray, searchValue);
+
+            // Assert
+            // exception expected
+        }
+
+
+        [TestMethod]
+        public void RecursiveBinarySearchOrdinaryTest()
+        {
+            // Arrange
+            var entryArray = this.Init(10);
+            var searchValue = 7;
+
+            // Act
+            var result = _searchComputer.RecursiveBinarySearch(entryArray, searchValue, 0, entryArray.Length - 1);
+
+            // Assert
+            Assert.AreEqual(result, 7);
+            Assert.AreEqual(entryArray[result], searchValue);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectNotFoundException))]
+        public void RecursiveBinarySearchEmptyArrayTest()
+        {
+            // Arrange
+            var entryArray = this.Init(10);
+            var searchValue = -1;
+
+            // Act
+            var result = _searchComputer.RecursiveBinarySearch(entryArray, searchValue, 0, entryArray.Length - 1);
+
+            // Assert
+            // exception expected
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectNotFoundException))]
+        public void RecursiveBinarySearchNoTargetValueTest()
+        {
+            // Arrange
+            var entryArray = this.Init(10);
+            var searchValue = 11;
+
+            // Act
+            var result = _searchComputer.RecursiveBinarySearch(entryArray, searchValue, 0, entryArray.Length - 1);
 
             // Assert
             // exception expected
